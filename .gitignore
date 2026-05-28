@@ -1,0 +1,74 @@
+# ============================================================
+#  SISTA QC — Fichiers a NE PAS envoyer sur GitHub
+# ============================================================
+
+# === SECRETS ET CLES API (CRITIQUE) ===
+.env
+.env.local
+.env.production
+*.env
+secrets/
+credentials.json
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+
+# === Environnements virtuels ===
+venv/
+env/
+ENV/
+.venv/
+.conda/
+
+# === Streamlit ===
+.streamlit/secrets.toml
+
+# === Fichiers temporaires SISTA ===
+cache/
+temp/
+tmp/
+*.tmp
+*.bak
+*.swp
+
+# === Donnees sensibles (a adapter selon votre cas) ===
+# uploads/
+# data/raw/
+# data/private/
+*.sav
+*.dta
+
+# === Editeurs / IDE ===
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# === Logs ===
+*.log
+logs/
+
+# === Jupyter Notebooks ===
+.ipynb_checkpoints/
+*.ipynb
+
+# === Sortie Streamlit ===
+.streamlit/
+
+# === Tests ===
+.pytest_cache/
+.coverage
+htmlcov/
+
+# === Backups personnels ===
+*_backup.*
+*_old.*
+ancien_*
