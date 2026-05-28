@@ -13,7 +13,7 @@ import pandas as pd
 import streamlit as st
 
 # ----------------------------------------------------------------------
-#  Chargement des cles API depuis le fichier .env (a la racine du projet)
+#  Chargement des cles API : .env (en local) OU st.secrets (sur Streamlit Cloud)
 # ----------------------------------------------------------------------
 
 def _load_env_file():
@@ -36,7 +36,18 @@ def _load_env_file():
         pass
 
 
+def _load_streamlit_secrets():
+    """Charge les cles API depuis st.secrets (Streamlit Cloud)."""
+    try:
+        for key in ("ANTHROPIC_API_KEY", "GROQ_API_KEY", "GEMINI_API_KEY"):
+            if key in st.secrets:
+                os.environ.setdefault(key, str(st.secrets[key]))
+    except Exception:
+        pass
+
+
 _load_env_file()
+_load_streamlit_secrets()
 
 from core.loader import load_file
 from core.profiler import profile_dataset
@@ -50,6 +61,13 @@ from core import ai_agent
 st.set_page_config(page_title="SISTA QC — Controle Qualite",
                    page_icon="logo_sista.png", layout="wide",
                    initial_sidebar_state="collapsed")
+
+# ----------------------------------------------------------------------
+#  Authentification — l'app ne s'affiche QUE si l'utilisateur est connecte
+# ----------------------------------------------------------------------
+from auth import check_password
+if not check_password():
+    st.stop()
 
 NAVY = "#13263D"
 NAVY_DEEP = "#0D1B2C"
